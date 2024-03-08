@@ -4,10 +4,6 @@
 #
 # Profesor: Juan Carlos Montoya
 #
-# <para borrar: EL OBJETIVO DE ESTA DOCUMENTACÍON ES QUE CUALQUIER LECTOR CON EL REPO, EN ESPECIAL EL PROFESOR, ENTIENDA EL ALCANCE DE LO DESARROLLADO Y QUE PUEDA REPRODUCIR SIN EL ESTUDIANTE EL AMBIENTE DE DESARROLLO Y EJECUTAR Y USAR LA APLICACIÓN SIN PROBLEMAS>
-
-# <para borrar: renombre este archivo a README.md cuando lo vaya a usar en un caso específico>
-
 # P2P - Comunicación entre procesos mediante API REST, RPC y MOM
 #
 # 1. breve descripción de la actividad
@@ -19,11 +15,31 @@ Estructura de red P2P no estructurada.
 Desarrollo de módulos de servidor (PServidor) y cliente (PCliente) para cada peer.
 Punto de acceso al servicio a través de cualquier peer en la red.
 ## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
-
+Algunas funcionalidades como la carga de un recurso dummy no fueron implementadas.
 # 2. información general de diseño de alto nivel, arquitectura, patrones, mejores prácticas utilizadas.
-
+El sistema está diseñado utilizando una arquitectura distribuida P2P, donde cada peer actúa como cliente y servidor. Se siguen prácticas de desarrollo de software y se implementan patrones de diseño para mantener la modularidad y la escalabilidad del sistema.
 # 3. Descripción del ambiente de desarrollo y técnico: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+Lenguaje de Programación: Python
+Librerías y Paquetes: gRPC, RabbitMQ, Flask, etc.
+Detalles de Desarrollo: Compilación, Ejecución, Detalles Técnicos, Configuración de Parámetros del Proyecto.
 
+/*La propuesta para utilizar múltiples middlewares en un sistema P2P no estructurado y descentralizado incluye:
+
+Comunicación Cliente-Servidor con gRPC:
+
+Se emplea gRPC para facilitar una comunicación eficiente y de alto rendimiento entre el cliente y el servidor.
+Se definen servicios y mensajes gRPC para llevar a cabo las operaciones principales, como consultas de recursos, descarga y carga de archivos.
+Los métodos del servidor gRPC se implementan para manejar las solicitudes del cliente y proporcionar las respuestas correspondientes.
+Comunicación entre Nodos con RabbitMQ (MOM):
+
+Se utiliza RabbitMQ como middleware de mensajería para posibilitar la comunicación entre los nodos.
+Se establecen colas de mensajes para la búsqueda de recursos y la difusión de información sobre la ubicación de archivos entre los nodos.
+Cuando un nodo requiere buscar un recurso en la red, publica un mensaje en la cola correspondiente, y los nodos que poseen dicho recurso responden con su ubicación.
+Interfaz de Usuario y Exposición de Servicios con API REST:
+
+Se emplea API REST para exponer la funcionalidad del sistema a través de una interfaz de usuario web o móvil.
+Se definen endpoints REST para las operaciones principales, como búsqueda de recursos, descarga y carga de archivos.
+El cliente de consola (PCliente) también puede interactuar con el sistema mediante estos endpoints REST./*
 ## como se compila y ejecuta.
 ## detalles del desarrollo.
 ## detalles técnicos
