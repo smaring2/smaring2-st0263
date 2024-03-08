@@ -100,6 +100,8 @@ Iniciar los servidores según las indicaciones anteriores.
 Los usuarios pueden interactuar con la aplicación a través de la interfaz de línea de comandos o mediante solicitudes HTTP a la API REST.
 Para realizar operaciones de búsqueda, descarga o carga de archivos, los usuarios pueden enviar solicitudes a los nodos peers utilizando las URLs proporcionadas.
 # 5. otra información que considere relevante para esta actividad.
+## Arquitectura
+![image](https://github.com/smaring2/smaring2-st0263/assets/110732795/141d1ab3-93c6-4ffd-91ff-82ae829b3f12)
 
 # referencias:
 
