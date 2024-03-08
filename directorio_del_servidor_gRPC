@@ -1,0 +1,37 @@
+{
+  "middleware": {
+    "grpc": {
+      "host": "localhost",
+      "port": 50051,
+      "directory": "peers/peer1/archivos/",
+      "ip": "127.0.0.1"
+    },
+    "rabbitmq": {
+      "host": "localhost",
+      "queue": "busqueda_archivos"
+    }
+  },
+  "api_rest": {
+    "host": "localhost",
+    "port": 5000,
+    "directory": "api_rest/archivos"
+  },
+  "peers": [
+    {
+      "name": "peer1",
+      "ip": "127.0.0.1",
+      "port": 6000,
+      "directory": "peers/peer1/archivos/",
+      "friend_primary_url": "http://127.0.0.1:6001",
+      "friend_secondary_url": "http://127.0.0.1:6002"
+    },
+    {
+      "name": "peer2",
+      "ip": "127.0.0.1",
+      "port": 6001,
+      "directory": "peers/peer2/archivos/",
+      "friend_primary_url": "http://127.0.0.1:6000",
+      "friend_secondary_url": "http://127.0.0.1:6002"
+    }
+  ]
+}

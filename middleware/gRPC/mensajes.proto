@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package p2p;
+
+import "google/protobuf/empty.proto";
+
+message RecursosRequest {}
+
+message RecursosResponse {
+  repeated string recursos = 1;
+}
+
+message ArchivoRequest {
+  string nombre_archivo = 1;
+  bytes contenido = 2;
+}
+
+message ArchivoResponse {
+  bytes contenido = 1;
+}
+
+service ServidorP2P {
+  rpc ConsultarRecursos(RecursosRequest) returns (RecursosResponse) {}
+  rpc DescargarArchivo(ArchivoRequest) returns (ArchivoResponse) {}
+  rpc SubirArchivo(ArchivoRequest) returns (google.protobuf.Empty) {}
+}
