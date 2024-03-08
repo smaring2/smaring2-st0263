@@ -1,15 +1,10 @@
 import grpc
-import sys
 import os
 import json
 import time
 from concurrent import futures
-
-# Añade el directorio middleware/gRPC al path de Python
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'middleware', 'gRPC'))
-
-# Importa los módulos generados a partir de los archivos .proto
-import mensajes_pb2
+from pathlib import Path
+from mensajes_pb2 import ArchivoResponse, ArchivoRequest, RecursosResponse, NombreArchivo
 import mensajes_pb2_grpc
 
 class PServidor(mensajes_pb2_grpc.ServidorP2PServicer):
@@ -17,23 +12,38 @@ class PServidor(mensajes_pb2_grpc.ServidorP2PServicer):
         self.config = config
 
     def ConsultarRecursos(self, request, context):
-        recursos = ["recurso1", "recurso2", "recurso3"]  # Simulación de recursos disponibles
-        return mensajes_pb2.RecursosResponse(recursos=recursos)
+        directorio = self.config['directory']
+        recursos = []
+        for archivo in Path(directorio).iterdir():
+            if archivo.is_file():
+                recursos.append(archivo.name)
+        return RecursosResponse(recursos=recursos)
 
     def DescargarArchivo(self, request, context):
-        # Aquí iría el código para descargar el archivo
-        pass
+        directorio = self.config['directory']
+        ruta_archivo = Path(directorio) / request.nombre_archivo
+        if ruta_archivo.is_file():
+            with open(ruta_archivo, 'rb') as archivo:
+                contenido = archivo.read()
+            return ArchivoResponse(contenido=contenido)
+        else:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details('Archivo no encontrado')
+            return ArchivoResponse()
 
     def SubirArchivo(self, request, context):
-        # Aquí iría el código para subir el archivo
-        pass
+        directorio = self.config['directory']
+        ruta_archivo = Path(directorio) / request.nombre_archivo
+        with open(ruta_archivo, 'wb') as archivo:
+            archivo.write(request.contenido)
+        return ArchivoResponse()
 
 def iniciar_servidor(config):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     mensajes_pb2_grpc.add_ServidorP2PServicer_to_server(PServidor(config), server)
-    server.add_insecure_port(f"{config['middleware']['grpc']['ip']}:{config['middleware']['grpc']['port']}")
+    server.add_insecure_port(f"{config['ip']}:{config['port']}")
     server.start()
-    print("Servidor P2P iniciado. Escuchando en el puerto", config['middleware']['grpc']['port'])
+    print(f"Servidor P2P iniciado. Escuchando en el puerto {config['port']}")
 
     try:
         while True:
@@ -43,6 +53,6 @@ def iniciar_servidor(config):
         print("Servidor detenido.")
 
 if __name__ == '__main__':
-    with open(os.path.join(os.path.dirname(__file__), '..', '..', 'config.json')) as f:
-        config = json.load(f)
+    with open('config.json') as f:
+        config = json.load(f)['middleware']['grpc']
     iniciar_servidor(config)
