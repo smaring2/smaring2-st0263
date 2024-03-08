@@ -23,7 +23,7 @@ Lenguaje de Programación: Python
 Librerías y Paquetes: gRPC, RabbitMQ, Flask, etc.
 Detalles de Desarrollo: Compilación, Ejecución, Detalles Técnicos, Configuración de Parámetros del Proyecto.
 
-/*La propuesta para utilizar múltiples middlewares en un sistema P2P no estructurado y descentralizado incluye:
+La propuesta para utilizar múltiples middlewares en un sistema P2P no estructurado y descentralizado incluye:
 
 Comunicación Cliente-Servidor con gRPC:
 
@@ -39,31 +39,67 @@ Interfaz de Usuario y Exposición de Servicios con API REST:
 
 Se emplea API REST para exponer la funcionalidad del sistema a través de una interfaz de usuario web o móvil.
 Se definen endpoints REST para las operaciones principales, como búsqueda de recursos, descarga y carga de archivos.
-El cliente de consola (PCliente) también puede interactuar con el sistema mediante estos endpoints REST./*
-## como se compila y ejecuta.
-## detalles del desarrollo.
-## detalles técnicos
-## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc)
-## opcional - detalles de la organización del código por carpetas o descripción de algún archivo. (ESTRUCTURA DE DIRECTORIOS Y ARCHIVOS IMPORTANTE DEL PROYECTO, comando 'tree' de linux)
-## 
-## opcionalmente - si quiere mostrar resultados o pantallazos 
+El cliente de consola (PCliente) también puede interactuar con el sistema mediante estos endpoints REST.
+
+Asegúrate de tener instalado Python y las dependencias necesarias. Puedes instalarlas usando pip:
+pip install -r requirements.txt
+Compilación y ejecución del servidor gRPC:
+Ubícate en el directorio del servidor gRPC:
+cd middleware/gRPC
+Luego, ejecuta el servidor gRPC:
+python servidor.py
+Compilación y ejecución del servidor RabbitMQ:
+Ubícate en el directorio del servidor RabbitMQ:
+cd middleware/RabbitMQ
+Asegúrate de tener instalado RabbitMQ en tu sistema y de que el servidor esté en funcionamiento.
+Ejecuta el servidor RabbitMQ:
+python servidor.py
+Compilación y ejecución de los servidores Peer:
+Para cada peer, ubícate en su respectivo directorio:
+cd peers/peerX   # Donde X es el número de peer
+Ejecuta el servidor Peer (PServidor) y el cliente Peer (PCliente) para cada uno de ellos:
+python PServidor.py & python PCliente.py
+
+En verdad hay varias formas de ejecutar y probar el programa, pero la mencionada es una de ellas.
 
 # 4. Descripción del ambiente de EJECUCIÓN (en producción) lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
-
+Lenguaje de Programación: Python
+Librerías y Paquetes: gRPC, RabbitMQ, Flask, etc.
 # IP o nombres de dominio en nube o en la máquina servidor.
-
-## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc)
-
+gRPC:
+Host: localhost
+Puerto: 50051
+Directorio de archivos: peers/peer1/archivos/
+IP: 127.0.0.1
+RabbitMQ:
+Host: localhost
+Cola: busqueda_archivos
+API REST:
+Host: localhost
+Puerto: 5000
+Directorio de archivos: api_rest/archivos
+Peers:
+peer1:
+IP: 127.0.0.1
+Puerto: 6000
+Directorio de archivos: peers/peer1/archivos/
+URL primaria del amigo: http://127.0.0.1:6001
+URL secundaria del amigo: http://127.0.0.1:6002
+peer2:
+IP: 127.0.0.1
+Puerto: 6001
+Directorio de archivos: peers/peer2/archivos/
+URL primaria del amigo: http://127.0.0.1:6000
+URL secundaria del amigo: http://127.0.0.1:6002
 ## como se lanza el servidor.
-
+Para el servidor gRPC, ejecutar el script de servidor en el directorio correspondiente.
+Para el servidor RabbitMQ, asegurarse de tener RabbitMQ instalado y ejecutar el servidor.
+Para la API REST, ejecutar el script de servidor Flask en el directorio correspondiente.
 ## una mini guia de como un usuario utilizaría el software o la aplicación
-
-## opcionalmente - si quiere mostrar resultados o pantallazos 
-
+Iniciar los servidores según las indicaciones anteriores.
+Los usuarios pueden interactuar con la aplicación a través de la interfaz de línea de comandos o mediante solicitudes HTTP a la API REST.
+Para realizar operaciones de búsqueda, descarga o carga de archivos, los usuarios pueden enviar solicitudes a los nodos peers utilizando las URLs proporcionadas.
 # 5. otra información que considere relevante para esta actividad.
 
 # referencias:
-<debemos siempre reconocer los créditos de partes del código que reutilizaremos, así como referencias a youtube, o referencias bibliográficas utilizadas para desarrollar el proyecto o la actividad>
-## sitio1-url 
-## sitio2-url
-## url de donde tomo info para desarrollar este proyecto
+
