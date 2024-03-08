@@ -8,7 +8,7 @@
 #
 # 1. breve descripción de la actividad
 #
-<La actividad se centra en implementar una comunicación entre procesos (P2P) utilizando diferentes mecanismos como API REST, RPC (Remote Procedure Call) y MOM (Message-Oriented Middleware). El objetivo es desarrollar un sistema distribuido donde los procesos (peers) puedan comunicarse entre sí para compartir recursos y realizar consultas.>
+La actividad se centra en implementar una comunicación entre procesos (P2P) utilizando diferentes mecanismos como API REST, RPC (Remote Procedure Call) y MOM (Message-Oriented Middleware). El objetivo es desarrollar un sistema distribuido donde los procesos (peers) puedan comunicarse entre sí para compartir recursos y realizar consultas.
 ## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
 Implementación de comunicación entre procesos utilizando API REST, RPC y MOM.
 Estructura de red P2P no estructurada.
